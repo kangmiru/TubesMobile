@@ -3,7 +3,10 @@ package com.e.tubesmobile.screens
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.e.tubesmobile.model.JenisKomputer
 import com.e.tubesmobile.model.Komputer
+import com.e.tubesmobile.repositories.KomputerRepository
+import org.w3c.dom.Text
 import javax.inject.Inject
 
 class PengelolaanKomputerViewModel @Inject constructor(private val komputerRepository: KomputerRepository) : ViewModel(){
@@ -26,7 +29,7 @@ class PengelolaanKomputerViewModel @Inject constructor(private val komputerRepos
     suspend fun loadItems()
     {
         _isLoading.postValue(true)
-        KomputerRepository.loadItems(onSuccess = {
+        komputerRepository.loadItems(onSuccess = {
             _isLoading.postValue(false)
             _list.postValue(it)
         }, onError = { list, message ->
@@ -36,11 +39,13 @@ class PengelolaanKomputerViewModel @Inject constructor(private val komputerRepos
         })
     }
 
-    suspend fun insert(tanggal: String,
-                       nama: String,
-                       berat: String){
+    suspend fun insert(merk: String,
+                       jenis: JenisKomputer,
+                       harga: Int,
+                       dapatDiUpgrade : Boolean,
+                       spesifikasi : Text){
         _isLoading.postValue(true)
-        KomputerRepository.insert(tanggal, nama, berat,
+        komputerRepository.insert(merk, jenis, harga, dapatDiUpgrade, spesifikasi,
             onError = { item, message ->
                 _toast.postValue(message)
                 _isLoading.postValue(false)
@@ -51,16 +56,18 @@ class PengelolaanKomputerViewModel @Inject constructor(private val komputerRepos
     }
 
     suspend fun loadItem(id: String, onSucces : (Komputer?) -> Unit){
-        val item = KomputerRepository.find(id)
+        val item = komputerRepository.find(id)
         onSucces(item)
     }
 
     suspend fun update(id: String,
-                       tanggal: String,
-                       nama: String,
-                       berat: String){
+                       merk: String,
+                       jenis: JenisKomputer,
+                       harga: Int,
+                       dapatDiUpgrade : Boolean,
+                       spesifikasi : Text){
         _isLoading.postValue(true)
-        KomputerRepository.update(id, tanggal, nama, berat,
+        komputerRepository.update(id, merk, jenis, harga, dapatDiUpgrade, spesifikasi,
             onError = {
                     item, message ->
                 _toast.postValue(message)
@@ -73,7 +80,7 @@ class PengelolaanKomputerViewModel @Inject constructor(private val komputerRepos
 
     suspend fun delete(id: String) {
         _isLoading.postValue(true)
-        KomputerRepository.delete(id, onError = { message ->
+        komputerRepository.delete(id, onError = { message ->
             _toast.postValue(message)
             _isLoading.postValue(false)
             _success.postValue(true)
