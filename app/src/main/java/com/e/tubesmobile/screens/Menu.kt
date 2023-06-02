@@ -13,9 +13,9 @@ enum class Menu(
     val icon: ImageVector,
     val route: String
 ) {
-    HOME(R.string.home, Icons.Default.Home, "Home"),
+    HOME(R.string.home, Icons.Default.Home, "home"),
     PENGELOLAAN_KOMPUTER(R.string.pengelolaan_komputer, Icons.Default.List, "pengelolaan-komputer"),
-    SETTING(R.string.setting, Icons.Default.Settings, "Setting");
+    SETTING(R.string.setting, Icons.Default.Settings, "setting");
     companion object {
         fun getTabFromResource(@StringRes resource: Int) : Menu
         {
