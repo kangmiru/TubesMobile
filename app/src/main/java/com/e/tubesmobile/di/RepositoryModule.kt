@@ -1,5 +1,6 @@
 package com.e.tubesmobile.di
 
+import com.e.tubesmobile.network.KomputerApi
 import com.e.tubesmobile.persistance.KomputerDao
 import com.e.tubesmobile.repositories.KomputerRepository
 import dagger.Module
