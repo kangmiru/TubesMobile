@@ -142,7 +142,7 @@ fun FormPencatatanKomputer(navController : NavHostController, id: String? = null
                         scope.launch {
                             viewModel.insert(
                                 merk = merk.value.text,
-                                jenis = jenis.value,
+                                jenis = jenis.value.toString(),
                                 harga = harga.value.text.toIntOrNull() ?: 0,
                                 dapatDiUpgrade = dapatDiUpgrade.value,
                                 spesifikasi = spesifikasi.value.text)
