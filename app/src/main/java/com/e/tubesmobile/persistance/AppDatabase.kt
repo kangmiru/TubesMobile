@@ -7,5 +7,5 @@ import com.e.tubesmobile.model.Komputer
 
 @Database(entities = [Komputer::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun KomputerDao() : KomputerDao
+    abstract fun komputerDao() : KomputerDao
 }
