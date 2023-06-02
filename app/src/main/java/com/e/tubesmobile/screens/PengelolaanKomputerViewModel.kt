@@ -8,10 +8,11 @@ import androidx.lifecycle.ViewModel
 import com.e.tubesmobile.model.JenisKomputer
 import com.e.tubesmobile.model.Komputer
 import com.e.tubesmobile.repositories.KomputerRepository
-import org.w3c.dom.Text
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-class PengelolaanKomputerViewModel @Inject constructor(private val komputerRepository: KomputerRepository) : ViewModel(){
+@HiltViewModel
+class PengelolaanKomputerViewModel @Inject constructor(private val komputerRepository: KomputerRepository) : ViewModel() {
     private val _isLoading: MutableLiveData<Boolean> =
         MutableLiveData(false)
     val isLoading: LiveData<Boolean> get() = _isLoading
@@ -43,10 +44,11 @@ class PengelolaanKomputerViewModel @Inject constructor(private val komputerRepos
 
     suspend fun insert(
         merk: String,
-        jenis: String,
+        jenis: JenisKomputer,
         harga: Int,
         dapatDiUpgrade: Boolean,
-        spesifikasi: Text){
+        spesifikasi: String
+    ){
         _isLoading.postValue(true)
         komputerRepository.insert(merk, jenis, harga, dapatDiUpgrade, spesifikasi,
             onError = { item, message ->
@@ -58,21 +60,20 @@ class PengelolaanKomputerViewModel @Inject constructor(private val komputerRepos
             })
     }
 
-    suspend fun loadItem(id: String, onSucces : (Komputer?) -> Unit){
+    suspend fun loadItem(id: String, onSuccess: (Komputer?)
+    -> Unit) {
         val item = komputerRepository.find(id)
-        onSucces(item)
+        onSuccess(item)
     }
-
     suspend fun update(id: String,
                        merk: String,
                        jenis: JenisKomputer,
                        harga: Int,
-                       dapatDiUpgrade : Boolean,
-                       spesifikasi : Text){
+                       dapatDiUpgrade: Boolean,
+                       spesifikasi: String){
         _isLoading.postValue(true)
         komputerRepository.update(id, merk, jenis, harga, dapatDiUpgrade, spesifikasi,
-            onError = {
-                    item, message ->
+            onError = { item, message ->
                 _toast.postValue(message)
                 _isLoading.postValue(false)
             }, onSuccess = {
