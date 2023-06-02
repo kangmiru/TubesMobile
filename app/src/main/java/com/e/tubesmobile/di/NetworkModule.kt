@@ -1,6 +1,7 @@
 package com.e.tubesmobile.di
 
 import android.content.Context
+import com.e.tubesmobile.network.KomputerApi
 import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides

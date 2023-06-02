@@ -27,7 +27,7 @@ object PersistenceModule {
     }
     @Provides
     @Singleton
-    fun provideKomputerDao(appDatabase: AppDatabase): KomputerDao {
-        return appDatabase.KomputerDao()
+    fun provideSetoranSampahDao(appDatabase: AppDatabase): KomputerDao {
+        return appDatabase.komputerDao()
     }
 }

@@ -1,12 +1,15 @@
 package com.e.tubesmobile.repositories
 
-import androidx.compose.ui.tooling.data.EmptyGroup.data
 import com.benasher44.uuid.uuid4
 import com.e.tubesmobile.model.JenisKomputer
 import com.e.tubesmobile.model.Komputer
+import com.e.tubesmobile.network.KomputerApi
 import com.e.tubesmobile.persistance.KomputerDao
+import com.skydoves.sandwich.message
+import com.skydoves.sandwich.suspendOnError
+import com.skydoves.sandwich.suspendOnException
+import com.skydoves.sandwich.suspendOnSuccess
 import com.skydoves.whatif.whatIfNotNull
-import kotlinx.coroutines.NonCancellable.message
 import org.w3c.dom.Text
 import javax.inject.Inject
 
@@ -43,7 +46,7 @@ class KomputerRepository @Inject constructor(
         jenis: JenisKomputer,
         harga: Int,
         dapatDiUpgrade : Boolean,
-        spesifikasi : Text,
+        spesifikasi : String,
         onSuccess: (Komputer) -> Unit,
         onError: (Komputer?, String) -> Unit
     ) {
@@ -67,7 +70,7 @@ class KomputerRepository @Inject constructor(
         jenis: JenisKomputer,
         harga: Int,
         dapatDiUpgrade : Boolean,
-        spesifikasi : Text,
+        spesifikasi : String,
         onSuccess: (Komputer) -> Unit,
         onError: (Komputer?, String) -> Unit
     ) {
