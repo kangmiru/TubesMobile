@@ -36,7 +36,7 @@ fun KompterItem(item: Komputer, navController: NavHostController, onDelete: (Str
 
             Column(modifier = Modifier.weight(3f)) {
                 Text(text = "Jenis", fontSize = 14.sp)
-                Text(text = item.jenis.toString(), fontSize = 16.sp,
+                Text(text = item.jenis, fontSize = 16.sp,
                     fontWeight = FontWeight.Bold)
             }
 
@@ -82,7 +82,7 @@ fun KompterItem(item: Komputer, navController: NavHostController, onDelete: (Str
                     expanded = false
                     when (s) {
                         "Edit" -> {
-                            navController.navigate("editpengelolaan-komputer/${item.id}") }
+                            navController.navigate("edit-pengelolaan-komputer/${item.id}") }
                         "Delete" -> {
                             confirmationDialogState.show()
                         }

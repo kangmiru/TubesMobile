@@ -33,8 +33,7 @@ fun MainScreen() {
                 elevation = 0.dp,
                 modifier= Modifier.fillMaxWidth()) {
                 Box(Modifier.height(32.dp)) {
-                    Row(
-                        Modifier.fillMaxHeight()
+                    Row(Modifier.fillMaxHeight()
                         .width(72.dp - appBarHorizontalPadding),
                         verticalAlignment = Alignment.CenterVertically) {
                         CompositionLocalProvider(
@@ -52,8 +51,7 @@ fun MainScreen() {
                         }
                     }
 
-                    Row(
-                        Modifier.fillMaxSize(),
+                    Row(Modifier.fillMaxSize(),
                         verticalAlignment = Alignment.CenterVertically) {
                         ProvideTextStyle(value = MaterialTheme.typography.h6) {
                             CompositionLocalProvider(
@@ -104,6 +102,12 @@ fun MainScreen() {
         ) {
             NavHost(navController = navController,
                 startDestination = "pengelolaan-komputer") {
+                composable("home") {
+                    HomeScreen()
+                }
+                composable("setting") {
+                    SettingScreen()
+                }
                 composable("pengelolaan-komputer") {
                     title.value = "Pengelolaan Komputer"
                     PengelolaanKomputerScreen(navController = navController, snackbarHostState = scaffoldState.snackbarHostState , modifier = Modifier.padding((innerPadding)))

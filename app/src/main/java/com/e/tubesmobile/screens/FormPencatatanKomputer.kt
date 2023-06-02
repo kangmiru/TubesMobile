@@ -144,7 +144,7 @@ fun FormPencatatanKomputer(navController : NavHostController, id: String? = null
                                 merk = merk.value.text,
                                 jenis = jenis.value,
                                 harga = harga.value.text.toIntOrNull() ?: 0,
-                                dapatDiUpgrade = dapatDiUpgrade.value,
+                                dapatDiUpgrade.value,
                                 spesifikasi = spesifikasi.value.text)
                         }
                     } else {
@@ -204,7 +204,7 @@ fun FormPencatatanKomputer(navController : NavHostController, id: String? = null
             viewModel.loadItem(id) { komputer ->
                 komputer?.let {
                     merk.value = TextFieldValue(komputer.merk)
-                    jenis.value = JenisKomputer.valueOf(komputer.jenis.toString())
+                    jenis.value = JenisKomputer.valueOf(komputer.jenis)
                     harga.value = TextFieldValue(komputer.harga.toString())
                     dapatDiUpgrade.value = komputer.dapatDiupgarade
                     spesifikasi.value = TextFieldValue(komputer.spesifikasi)
