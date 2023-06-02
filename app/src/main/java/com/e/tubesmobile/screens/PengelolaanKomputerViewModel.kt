@@ -39,11 +39,12 @@ class PengelolaanKomputerViewModel @Inject constructor(private val komputerRepos
         })
     }
 
-    suspend fun insert(merk: String,
-                       jenis: JenisKomputer,
-                       harga: Int,
-                       dapatDiUpgrade : Boolean,
-                       spesifikasi : Text){
+    suspend fun insert(
+        merk: String,
+        jenis: String,
+        harga: Int,
+        dapatDiUpgrade: Boolean,
+        spesifikasi: Text){
         _isLoading.postValue(true)
         komputerRepository.insert(merk, jenis, harga, dapatDiUpgrade, spesifikasi,
             onError = { item, message ->

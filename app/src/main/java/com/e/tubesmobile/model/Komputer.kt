@@ -11,5 +11,5 @@ data class Komputer (
     val jenis:JenisKomputer,
     val harga:Int,
     val dapatDiupgarade: Boolean,
-    val spesifikasi: Text
+    val spesifikasi: String
     )
