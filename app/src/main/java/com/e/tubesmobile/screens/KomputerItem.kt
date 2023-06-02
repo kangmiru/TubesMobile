@@ -20,10 +20,8 @@ import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 import com.vanpra.composematerialdialogs.title
 
 @Composable
-fun KomputerItem(item: Komputer, navController: NavHostController, onDelete: (String) -> Unit) {
-    var expanded by remember {
-        mutableStateOf(false)
-    }
+fun KompterItem(item: Komputer, navController: NavHostController, onDelete: (String) -> Unit) {
+    var expanded by remember { mutableStateOf(false) }
     val subMenus = listOf("Edit", "Delete")
     val confirmationDialogState = rememberMaterialDialogState()
     Column(modifier = Modifier.fillMaxWidth()) {
@@ -35,26 +33,31 @@ fun KomputerItem(item: Komputer, navController: NavHostController, onDelete: (St
                 Text(text = item.merk, fontSize = 16.sp,
                     fontWeight = FontWeight.Bold)
             }
+
             Column(modifier = Modifier.weight(3f)) {
                 Text(text = "Jenis", fontSize = 14.sp)
-                Text(text = item.jenis, fontSize = 16.sp,
+                Text(text = item.jenis.toString(), fontSize = 16.sp,
                     fontWeight = FontWeight.Bold)
             }
+
             Column(modifier = Modifier.weight(3f)) {
                 Text(text = "Harga", fontSize = 14.sp)
                 Text(text = "Rp. ${item.harga}", fontSize =
                 16.sp, fontWeight = FontWeight.Bold)
             }
+
             Column(modifier = Modifier.weight(3f)) {
-                Text(text = "Dapat Di Upgrade", fontSize = 14.sp)
-                Text(text = item.dapatDiupgarade, fontSize = 16.sp,
+                Text(text = "Dapat DiUpgrade", fontSize = 14.sp)
+                Text(text = item.dapatDiupgarade.toString(), fontSize = 16.sp,
                     fontWeight = FontWeight.Bold)
             }
+
             Column(modifier = Modifier.weight(3f)) {
                 Text(text = "Spesifikasi", fontSize = 14.sp)
                 Text(text = item.spesifikasi, fontSize = 16.sp,
                     fontWeight = FontWeight.Bold)
             }
+
             Icon(
                 Icons.Default.MoreVert,
                 modifier = Modifier
@@ -79,9 +82,7 @@ fun KomputerItem(item: Komputer, navController: NavHostController, onDelete: (St
                     expanded = false
                     when (s) {
                         "Edit" -> {
-
-                            navController.navigate("edit-pengelolaan-komputer/${item.id}")
-                        }
+                            navController.navigate("editpengelolaan-komputer/${item.id}") }
                         "Delete" -> {
                             confirmationDialogState.show()
                         }
@@ -93,7 +94,6 @@ fun KomputerItem(item: Komputer, navController: NavHostController, onDelete: (St
         }
     }
     Divider(modifier = Modifier.fillMaxWidth())
-
     MaterialDialog(dialogState = confirmationDialogState,
         buttons = {
             positiveButton("Ya", onClick = {

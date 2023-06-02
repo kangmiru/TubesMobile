@@ -6,10 +6,10 @@ import com.e.tubesmobile.model.Komputer
 
 @Dao
 interface KomputerDao {
-    @Query("SELECT * FROM Komputer ORDER BY tanggal DESC")
+    @Query("SELECT * FROM Komputer ORDER BY merk DESC")
     fun loadAll(): LiveData<List<Komputer>>
 
-    @Query("SELECT * FROM Komputer ORDER BY tanggal DESC")
+    @Query("SELECT * FROM Komputer ORDER BY merk DESC")
     suspend fun getList(): List<Komputer>
 
     @Query("SELECT * FROM Komputer WHERE id = :id")

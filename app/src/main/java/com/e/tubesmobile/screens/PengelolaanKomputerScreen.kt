@@ -22,29 +22,30 @@ import com.e.tubesmobile.model.Komputer
 import kotlinx.coroutines.launch
 
 @Composable
-fun PengelolaanKomputerScreen(navController: NavHostController, snackbarHostState: SnackbarHostState, modifier: Modifier = Modifier) {
+fun PengelolaanKomputerScreen(navController: NavHostController,snackbarHostState:SnackbarHostState, modifier: Modifier = Modifier) {
     val viewModel = hiltViewModel<PengelolaanKomputerViewModel>()
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
-
-    val items: List<Komputer> by
-    viewModel.list.observeAsState(initial = listOf())
+    val items: List<Komputer> by viewModel.list.observeAsState(initial = listOf())
 
     Column(modifier = Modifier.fillMaxWidth()) {
         Button(onClick = {
-            navController.navigate("tambah-pengelolaan-sampah")
+            navController.navigate("tambah-pengelolaan-komputer")
         }) {
             Text(text = "Tambah")
         }
 
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(items = items, itemContent = { item ->
-                KomputerItem(item = item, navController = navController){
-                    scope.launch { viewModel.delete(it) }
+                KompterItem(item = item, navController = navController) {
+                    scope.launch {
+                        viewModel.delete(it)
+                    }
                 }
             })
         }
     }
+
     LaunchedEffect(scope) {
         viewModel.loadItems()
     }
@@ -60,4 +61,5 @@ fun PengelolaanKomputerScreen(navController: NavHostController, snackbarHostStat
             snackbarHostState.showSnackbar(it, actionLabel = "Tutup", duration = SnackbarDuration.Long)
         }
     }
+
 }
