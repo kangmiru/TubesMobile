@@ -1,5 +1,6 @@
 package com.e.tubesmobile.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -10,6 +11,8 @@ import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -25,11 +28,12 @@ fun BottomNavigationComposable(title : String, onClick: (Menu) -> Unit)
                 onClick = { onClick(tab)
                 },
                 icon = {
-                    Icon(
-                        tab.icon,
-                        modifier = Modifier.height(32.dp).width(32.dp),
+                    Image(
+                        painter = painterResource(id = tab.icon),
+                        modifier = Modifier
+                            .height(32.dp)
+                            .width(32.dp),
                         contentDescription = null,
-                        tint = Color.White
                     )
                 },
                 selectedContentColor = LocalContentColor.current,

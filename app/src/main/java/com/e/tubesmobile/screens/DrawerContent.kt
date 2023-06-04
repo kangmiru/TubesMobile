@@ -1,5 +1,6 @@
 package com.e.tubesmobile.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -8,13 +9,16 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.e.tubesmobile.R
 
 @Composable
 fun DrawerContent(onClick: (String) -> Unit)
@@ -28,9 +32,13 @@ fun DrawerContent(onClick: (String) -> Unit)
         modifier = Modifier
             .background(MaterialTheme.colors.background)
     ) {
-        Row (modifier = Modifier.fillMaxWidth().padding(5.dp),
+        Row (modifier = Modifier
+            .fillMaxWidth()
+            .padding(5.dp),
             horizontalArrangement = Arrangement.Center) {
-            Text("Selamat Datang", modifier = Modifier.height(32.dp).padding(2.dp),
+            Text("Selamat Datang", modifier = Modifier
+                .height(32.dp)
+                .padding(2.dp),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold)
         }
@@ -47,21 +55,25 @@ fun DrawerContent(onClick: (String) -> Unit)
                         .padding(5.dp),
                     contentColor = Color.Black
                 ) {
-                    Row (modifier =
-                    Modifier.padding(5.dp).clickable {
-                        onClick(menu.route)
-                    }) {
-                        Icon(
-                            menu.icon,
-                            modifier =
-                            Modifier.height(32.dp).width(32.dp),
+                    Row (modifier = Modifier
+                        .padding(5.dp)
+                        .clickable {
+                            onClick(menu.route)
+                        }) {
+                        Image(
+                            modifier = Modifier
+                                .height(32.dp)
+                                .width(32.dp),
+                            painter = painterResource(
+                                id = menu.icon
+                            ),
                             contentDescription = null,
-                            tint = Color.Unspecified
                         )
                         Text(
                             stringResource(id = menu.title),
-                            modifier =
-                            Modifier.height(32.dp).padding(2.dp),
+                            modifier = Modifier
+                                .height(32.dp)
+                                .padding(2.dp),
                             fontSize = 18.sp,
                             fontWeight = FontWeight.SemiBold)
                     }

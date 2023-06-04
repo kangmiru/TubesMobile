@@ -3,6 +3,7 @@ package com.e.tubesmobile.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -20,6 +21,12 @@ import com.e.tubesmobile.R
 
 @Composable
 fun HomeScreen() {
+    val menus = listOf(
+        Menu.HOME,
+        Menu.PENGELOLAAN_KOMPUTER,
+        Menu.SETTING)
+    val listState = rememberLazyListState()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
