@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.SnackbarHostState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,10 +18,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.e.tubesmobile.R
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController, snackbarHostState: SnackbarHostState, modifier: Modifier = Modifier) {
     val menus = listOf(
         Menu.HOME,
         Menu.PENGELOLAAN_KOMPUTER,
@@ -58,7 +60,9 @@ fun HomeScreen() {
         )
         Spacer(modifier = Modifier.height(30.dp))
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                navController.navigate("pengelolaan-komputer")
+                      },
             modifier = Modifier
                 .height(45.dp)
                 .width(200.dp),
@@ -99,6 +103,24 @@ fun HomeScreen() {
         ) {
             Text(
                 text = "Smarthphone",
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color.Black
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Button(
+            onClick = {
+                navController.navigate("setting")
+                      },
+            modifier = Modifier
+                .height(45.dp)
+                .width(200.dp),
+            colors = ButtonDefaults.buttonColors(Color.Green),
+            shape = RoundedCornerShape(8.dp)
+        ) {
+            Text(
+                text = "Pengaturan",
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color.Black

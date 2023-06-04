@@ -107,7 +107,7 @@ fun MainScreen() {
             NavHost(navController = navController,
                 startDestination = "home") {
                 composable("home") {
-                    HomeScreen()
+                    HomeScreen(navController = navController, snackbarHostState = scaffoldState.snackbarHostState , modifier = Modifier.padding((innerPadding)))
                 }
                 composable("setting") {
                     SettingScreen()
