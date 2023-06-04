@@ -31,9 +31,12 @@ fun MainScreen() {
             TopAppBar(
                 backgroundColor = Purple700,
                 elevation = 0.dp,
-                modifier= Modifier.fillMaxWidth()) {
-                Box(Modifier.height(32.dp)) {
-                    Row(Modifier.fillMaxHeight()
+                modifier= Modifier
+                    .fillMaxWidth()) {
+                Box(Modifier
+                    .height(32.dp)) {
+                    Row(Modifier
+                        .fillMaxHeight()
                         .width(72.dp - appBarHorizontalPadding),
                         verticalAlignment = Alignment.CenterVertically) {
                         CompositionLocalProvider(
@@ -51,7 +54,8 @@ fun MainScreen() {
                         }
                     }
 
-                    Row(Modifier.fillMaxSize(),
+                    Row(Modifier
+                        .fillMaxSize(),
                         verticalAlignment = Alignment.CenterVertically) {
                         ProvideTextStyle(value = MaterialTheme.typography.h6) {
                             CompositionLocalProvider(
@@ -101,7 +105,7 @@ fun MainScreen() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             NavHost(navController = navController,
-                startDestination = "pengelolaan-komputer") {
+                startDestination = "home") {
                 composable("home") {
                     HomeScreen()
                 }

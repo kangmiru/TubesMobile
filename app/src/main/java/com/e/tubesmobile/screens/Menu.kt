@@ -1,21 +1,16 @@
 package com.e.tubesmobile.screens
 
 import androidx.annotation.StringRes
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.ui.graphics.vector.ImageVector
 import com.e.tubesmobile.R
 
 enum class Menu(
     @StringRes val title: Int,
-    val icon: ImageVector,
+    val icon: Int,
     val route: String
 ) {
-    HOME(R.string.home, Icons.Default.Home, "home"),
-    PENGELOLAAN_KOMPUTER(R.string.pengelolaan_komputer, Icons.Default.List, "pengelolaan-komputer"),
-    SETTING(R.string.setting, Icons.Default.Settings, "setting");
+    HOME(R.string.home, R.drawable.baseline_home_24, "home"),
+    PENGELOLAAN_KOMPUTER(R.string.pengelolaan_komputer, R.drawable.baseline_computer_24, "pengelolaan-komputer"),
+    SETTING(R.string.setting, R.drawable.baseline_settings_24, "setting");
     companion object {
         fun getTabFromResource(@StringRes resource: Int) : Menu
         {
