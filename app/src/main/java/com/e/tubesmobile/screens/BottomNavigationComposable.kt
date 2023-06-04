@@ -29,7 +29,9 @@ fun BottomNavigationComposable(title : String, onClick: (Menu) -> Unit)
                 },
                 icon = {
                     Image(
-                        painter = painterResource(id = tab.icon),
+                        painter = painterResource(
+                            id = tab.icon
+                        ),
                         modifier = Modifier
                             .height(32.dp)
                             .width(32.dp),
