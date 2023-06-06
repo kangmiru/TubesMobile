@@ -1,6 +1,4 @@
- package com.e.tubesmobile.screens
-
-
+ package com.e.tubesmobile.screens.komputer
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -60,8 +58,7 @@ import javax.inject.Inject
              })
      }
 
-     suspend fun loadItem(id: String, onSuccess: (Komputer?)
-     -> Unit) {
+     suspend fun loadItem(id: String, onSuccess: (Komputer?) -> Unit) {
          val item = komputerRepository.find(id)
          onSuccess(item)
      }

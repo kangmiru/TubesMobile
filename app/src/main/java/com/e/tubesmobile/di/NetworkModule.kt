@@ -2,6 +2,8 @@ package com.e.tubesmobile.di
 
 import android.content.Context
 import com.e.tubesmobile.network.KomputerApi
+import com.e.tubesmobile.network.PeriferalApi
+import com.e.tubesmobile.network.SmarthphoneApi
 import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -47,5 +49,19 @@ object NetworkModule {
     fun provideKomputerApi(retrofit: Retrofit):
             KomputerApi {
         return retrofit.create(KomputerApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun providePeriferalApi(retrofit: Retrofit):
+            PeriferalApi {
+        return retrofit.create(PeriferalApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSmarthphoneApi(retrofit: Retrofit):
+            SmarthphoneApi {
+        return retrofit.create(SmarthphoneApi::class.java)
     }
 }

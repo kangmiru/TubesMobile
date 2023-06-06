@@ -107,14 +107,14 @@ fun MainScreen() {
             NavHost(navController = navController,
                 startDestination = "home") {
                 composable("home") {
-                    HomeScreen(navController = navController, snackbarHostState = scaffoldState.snackbarHostState , modifier = Modifier.padding((innerPadding)))
+                    HomeScreen(navController = navController, snackbarHostState = scaffoldState.snackbarHostState , modifier = Modifier.padding(innerPadding))
                 }
                 composable("setting") {
                     SettingScreen()
                 }
                 composable("pengelolaan-komputer") {
                     title.value = "Pengelolaan Komputer"
-                    PengelolaanKomputerScreen(navController = navController, snackbarHostState = scaffoldState.snackbarHostState , modifier = Modifier.padding((innerPadding)))
+                    PengelolaanKomputerScreen(navController = navController, snackbarHostState = scaffoldState.snackbarHostState , modifier = Modifier.padding(innerPadding))
                 }
                 composable("tambah-pengelolaan-komputer") {
                     title.value = "Tambah Pengelolaan Komputer"
@@ -129,6 +129,42 @@ fun MainScreen() {
                     title.value = "Edit Pengelolaan Komputer"
                     val id = backStackEntry.arguments?.getString("id") ?: return@composable
                     FormPencatatanKomputer(navController = navController, id = id, modifier = Modifier.padding(innerPadding))
+                }
+                composable("pengelolaan-periferal") {
+                    title.value = "Pengelolaan Periferal"
+                    PengelolaanPeriferalScreen(navController = navController, snackbarHostState = scaffoldState.snackbarHostState , modifier = Modifier.padding(innerPadding))
+                }
+                composable("tambah-pengelolaan-periferal") {
+                    title.value = "Tambah Pengelolaan Periferal"
+                    FormPencatatanPeriferal(navController = navController, modifier = Modifier.padding(innerPadding))
+                }
+                composable("edit-pengelolaan-periferal/{id}",
+                    listOf(
+                        navArgument("id") {
+                            type = NavType.StringType
+                        }
+                    )) { backStackEntry ->
+                    title.value = "Edit Pengelolaan Periferal"
+                    val id = backStackEntry.arguments?.getString("id") ?: return@composable
+                    FormPencatatanPeriferal(navController = navController, id = id, modifier = Modifier.padding(innerPadding))
+                }
+                composable("pengelolaan-smarthphone") {
+                    title.value = "Pengelolaan Smarthphone"
+                    PengelolaanSmarthphoneScreen(navController = navController, snackbarHostState = scaffoldState.snackbarHostState , modifier = Modifier.padding(innerPadding))
+                }
+                composable("tambah-pengelolaan-smarthphone") {
+                    title.value = "Tambah Pengelolaan Smarthphone"
+                    FormPencatatanSmarthphone(navController = navController, modifier = Modifier.padding(innerPadding))
+                }
+                composable("edit-pengelolaan-smarthphone/{id}",
+                    listOf(
+                        navArgument("id") {
+                            type = NavType.StringType
+                        }
+                    )) { backStackEntry ->
+                    title.value = "Edit Pengelolaan Smarthphone"
+                    val id = backStackEntry.arguments?.getString("id") ?: return@composable
+                    FormPencatatanSmarthphone(navController = navController, id = id, modifier = Modifier.padding(innerPadding))
                 }
             }
         }
