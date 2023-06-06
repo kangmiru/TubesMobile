@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.room.Room
 import com.e.tubesmobile.persistance.AppDatabase
 import com.e.tubesmobile.persistance.KomputerDao
+import com.e.tubesmobile.persistance.PeriferalDao
+import com.e.tubesmobile.persistance.SmarthphoneDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,7 +29,19 @@ object PersistenceModule {
     }
     @Provides
     @Singleton
-    fun provideSetoranSampahDao(appDatabase: AppDatabase): KomputerDao {
+    fun provideKomputerDao(appDatabase: AppDatabase): KomputerDao {
         return appDatabase.komputerDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providePeriferalDao(appDatabase: AppDatabase): PeriferalDao {
+        return appDatabase.periferalDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideSmarthphoneDao(appDatabase: AppDatabase): SmarthphoneDao {
+        return appDatabase.smarthphoneDao()
     }
 }

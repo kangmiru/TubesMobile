@@ -1,7 +1,5 @@
 package com.e.tubesmobile.screens
 
-
-
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -20,26 +18,31 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.e.tubesmobile.model.Komputer
+import com.e.tubesmobile.model.Smarthphone
+import com.e.tubesmobile.screens.smarthphone.PengelolaanSmarthphoneViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun PengelolaanKomputerScreen(navController: NavHostController,snackbarHostState:SnackbarHostState, modifier: Modifier = Modifier) {
-    val viewModel = hiltViewModel<PengelolaanKomputerViewModel>()
+fun PengelolaanSmarthphoneScreen(
+    navController: NavHostController,
+    snackbarHostState:SnackbarHostState,
+    modifier: Modifier = Modifier
+){
+    val viewModel = hiltViewModel<PengelolaanSmarthphoneViewModel>()
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
-    val items: List<Komputer> by viewModel.list.observeAsState(initial = listOf())
+    val items: List<Smarthphone> by viewModel.list.observeAsState(initial = listOf())
 
     Column(modifier = Modifier.fillMaxWidth()) {
         Button(onClick = {
-            navController.navigate("tambah-pengelolaan-komputer")
+            navController.navigate("tambah-pengelolaan-smarthphone")
         }) {
             Text(text = "Tambah")
         }
 
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(items = items, itemContent = { item ->
-                KompterItem(item = item, navController = navController) {
+                SmarthphoneItem(item = item, navController = navController) {
                     scope.launch {
                         viewModel.delete(it)
                     }
@@ -63,5 +66,4 @@ fun PengelolaanKomputerScreen(navController: NavHostController,snackbarHostState
             snackbarHostState.showSnackbar(it, actionLabel = "Tutup", duration = SnackbarDuration.Long)
         }
     }
-
 }

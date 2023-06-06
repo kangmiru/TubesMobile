@@ -1,8 +1,10 @@
 package com.e.tubesmobile.model
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.Date
+import java.time.LocalDate
 
 @Entity
 data class Smarthphone(
@@ -10,6 +12,7 @@ data class Smarthphone(
     val model:String,
     val warna:String,
     val storage:Int,
-    val tanggalRilis:Date,
+    @ColumnInfo(name = "tanggal_rilis")
+    val tanggalRilis: Date,
     val sistemOperasi: String,
 )

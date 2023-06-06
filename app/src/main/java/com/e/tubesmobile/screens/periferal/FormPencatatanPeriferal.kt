@@ -1,6 +1,5 @@
 package com.e.tubesmobile.screens
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,96 +17,77 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.e.tubesmobile.model.JenisSmarthphone
+import com.e.tubesmobile.model.JenisPeriferal
+import com.e.tubesmobile.screens.periferal.PengelolaanPeriferalViewModel
 import com.e.tubesmobile.ui.theme.Purple700
 import com.e.tubesmobile.ui.theme.Teal200
-import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.*
 
 @Composable
-fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = null, modifier: Modifier = Modifier){
-    val viewModel = hiltViewModel<PengelolaanSmarthphoneViewModel>()
-    val model = remember {
+fun FormPencatatanPeriferal (navController: NavHostController, id: String? = null, modifier: Modifier = Modifier){
+    val viewModel = hiltViewModel<PengelolaanPeriferalViewModel>()
+    val nama = remember {
         mutableStateOf(TextFieldValue(""))
     }
-    val warna = remember {
+    val harga = remember {
         mutableStateOf(TextFieldValue(""))
     }
-    val storage = remember {
+    val deskripsi = remember {
         mutableStateOf(TextFieldValue(""))
     }
-    val tanggalRilis = remember { mutableStateOf<Date?>(null) }
-    val sistemOperasi = remember {
-        mutableStateOf(JenisSmarthphone.Android)
+    val jenisPeriferal = remember {
+        mutableStateOf(JenisPeriferal.Keyboard)
     }
     val isLoading = remember {
         mutableStateOf(false)
     }
-    val buttonLabel = if (isLoading.value) "Mohon Tunggu..." else "Simpan"
+    val buttonLabel = if(isLoading.value) "Mohon Tunggu..." else "Simpan"
     val scope = rememberCoroutineScope()
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-    val tanggalDialogState = rememberMaterialDialogState()
 
     Column(modifier = Modifier
         .padding(10.dp)
         .fillMaxWidth()
     ) {
         OutlinedTextField(
-            label = { Text(text = "Model Smarthphone") },
-            value = model.value,
+            label = { Text(text = "Nama Periferal")},
+            value = nama.value,
             onValueChange = {
-                model.value = it
+                nama.value = it
             },
             modifier = Modifier
                 .padding(4.dp)
                 .fillMaxWidth(),
-            placeholder = { Text(text = "Model Smarthphone") }
+            placeholder = { Text(text = "Nama Periferal")}
         )
 
         OutlinedTextField(
-            label = { Text(text = "Warna Smarthphone") },
-            value = warna.value,
+            label = { Text(text = "Harga Periferal") },
+            value = harga.value,
             onValueChange = {
-                warna.value = it
-            },
-            modifier = Modifier
-                .padding(4.dp)
-                .fillMaxWidth(),
-            placeholder = { Text(text = "Warna Smarthphone") }
-        )
-
-        OutlinedTextField(
-            label = { Text(text = "Storage Smarthphone") },
-            value = storage.value,
-            onValueChange = {
-                storage.value = it
+                harga.value = it
             },
             modifier = Modifier
                 .padding(4.dp)
                 .fillMaxWidth(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            placeholder = { Text(text = "Storage Periferal") }
+            placeholder = { Text(text = "Harga Periferal") }
         )
 
         OutlinedTextField(
-            label = { Text(text = "Tanggal Rilis") },
-            value = tanggalRilis.value?.let { dateFormat.format(it) } ?: "",
-            onValueChange = {},
+            label = { Text(text = "Deskripsi")},
+            value = deskripsi.value,
+            onValueChange = {
+                deskripsi.value = it
+            },
             modifier = Modifier
                 .padding(4.dp)
-                .fillMaxWidth()
-                .clickable {
-                    tanggalDialogState.show()
-                },
-            placeholder = { Text(text = "yyyy-mm-dd") },
-            enabled = false
+                .fillMaxWidth(),
+            placeholder = { Text(text = "Deskripsi")}
         )
 
         OutlinedTextField(
-            label = { Text(text = "Jenis Operasi Sistem Smarthphone") },
-            value = sistemOperasi.value.toString(),
+            label = { Text(text = "Jenis Periferal") },
+            value = jenisPeriferal.value.toString(),
             onValueChange = {},
             modifier = Modifier
                 .padding(4.dp)
@@ -116,7 +96,7 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
         )
 
         var expanded by remember { mutableStateOf(false) }
-        val items = JenisSmarthphone.values()
+        val items = JenisPeriferal.values()
 
         DropdownMenu(
             expanded = expanded,
@@ -125,7 +105,7 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
             items.forEach { item ->
                 DropdownMenuItem(
                     onClick = {
-                        sistemOperasi.value = item
+                        jenisPeriferal.value = item
                         expanded = false
                     }
                 ) {
@@ -159,29 +139,25 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
                 onClick = {
                     if (id == null){
                         scope.launch{
-                            val formattedDate = dateFormat.format(tanggalRilis.value ?: Date())
                             viewModel.insert(
-                                model.value.text,
-                                warna.value.text,
-                                storage.value.text.toIntOrNull() ?: 0,
-                                formattedDate,
-                                sistemOperasi.value
+                                nama.value.text,
+                                harga.value.text.toIntOrNull() ?: 0,
+                                deskripsi.value.text,
+                                jenisPeriferal = jenisPeriferal.value
                             )
                         }
                     }else{
-                        scope.launch{
-                            val formattedDate = dateFormat.format(tanggalRilis.value ?: Date())
+                        scope.launch {
                             viewModel.update(
                                 id,
-                                model.value.text,
-                                warna.value.text,
-                                storage.value.text.toIntOrNull() ?: 0,
-                                formattedDate,
-                                sistemOperasi.value
+                                nama.value.text,
+                                harga.value.text.toIntOrNull() ?: 0,
+                                deskripsi.value.text,
+                                jenisPeriferal.value
                             )
                         }
                     }
-                    navController.navigate("pengelolaan-smarthphone")
+                    navController.navigate("pengelolaan-periferal")
                 },
                 colors = loginButtonColors
             ) {
@@ -198,11 +174,10 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
             Button(
                 modifier = Modifier.weight(5f),
                 onClick = {
-                    model.value = TextFieldValue("")
-                    warna.value = TextFieldValue("")
-                    storage.value = TextFieldValue("")
-                    tanggalRilis.value = null
-                    sistemOperasi.value = JenisSmarthphone.Android
+                    nama.value = TextFieldValue("")
+                    harga.value = TextFieldValue("")
+                    deskripsi.value = TextFieldValue("")
+                    jenisPeriferal.value = JenisPeriferal.Keyboard
                 },
                 colors = resetButtonColors
             ) {
@@ -224,13 +199,12 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
 
     if (id != null){
         LaunchedEffect(key1 = id){
-            viewModel.loadItem(id){smarthphone ->
-                smarthphone?.let {
-                    model.value = TextFieldValue("")
-                    warna.value = TextFieldValue("")
-                    storage.value = TextFieldValue("")
-                    tanggalRilis.value = null
-                    sistemOperasi.value = JenisSmarthphone.valueOf(smarthphone.sistemOperasi)
+            viewModel.loaditem(id){periferal ->
+                periferal?.let {
+                    nama.value = TextFieldValue("")
+                    harga.value = TextFieldValue("")
+                    deskripsi.value = TextFieldValue("")
+                    jenisPeriferal.value = JenisPeriferal.valueOf(periferal.jenisPeriferal)
                 }
             }
         }

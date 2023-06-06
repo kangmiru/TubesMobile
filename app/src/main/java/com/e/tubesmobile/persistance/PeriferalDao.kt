@@ -6,13 +6,13 @@ import com.e.tubesmobile.model.Periferal
 
 @Dao
 interface PeriferalDao {
-    @Query("SELECT * FROM Komputer ORDER BY nama DESC")
+    @Query("SELECT * FROM Periferal ORDER BY nama DESC")
     fun loadAll(): LiveData<List<Periferal>>
 
-    @Query("SELECT * FROM Komputer ORDER BY nama DESC")
+    @Query("SELECT * FROM Periferal ORDER BY nama DESC")
     suspend fun getList(): List<Periferal>
 
-    @Query("SELECT * FROM Komputer WHERE id = :id")
+    @Query("SELECT * FROM Periferal WHERE id = :id")
     suspend fun find(id: String): Periferal?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -24,6 +24,6 @@ interface PeriferalDao {
     @Delete
     fun delete(item: Periferal)
 
-    @Query("DELETE FROM Komputer WHERE id = :id")
+    @Query("DELETE FROM Periferal WHERE id = :id")
     suspend fun delete(id: String)
 }

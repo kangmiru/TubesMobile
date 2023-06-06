@@ -1,4 +1,4 @@
-package com.e.tubesmobile.screens
+package com.e.tubesmobile.screens.smarthphone
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,8 +6,11 @@ import androidx.lifecycle.ViewModel
 import com.e.tubesmobile.model.JenisSmarthphone
 import com.e.tubesmobile.model.Smarthphone
 import com.e.tubesmobile.repositories.SmarthphoneRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import java.util.*
 import javax.inject.Inject
 
+@HiltViewModel
 class PengelolaanSmarthphoneViewModel @Inject constructor(
     private val smarthphoneRepository: SmarthphoneRepository
 ) : ViewModel() {
@@ -43,7 +46,7 @@ class PengelolaanSmarthphoneViewModel @Inject constructor(
         model: String,
         warna: String,
         storage: Int,
-        tanggalRilis: String,
+        tanggalRilis: Date,
         sistemOperasi: JenisSmarthphone
     ){
         _isLoading.postValue(true)
@@ -61,7 +64,7 @@ class PengelolaanSmarthphoneViewModel @Inject constructor(
 
     suspend fun loadItem(id: String, onSuccess: (Smarthphone?)->Unit){
         val item = smarthphoneRepository.find(id)
-        onSuccess(item)
+        onSuccess.invoke(item)
     }
 
     suspend fun update(
@@ -69,7 +72,7 @@ class PengelolaanSmarthphoneViewModel @Inject constructor(
         model: String,
         warna: String,
         storage: Int,
-        tanggalRilis: String,
+        tanggalRilis: Date,
         sistemOperasi: JenisSmarthphone
     ){
         _isLoading.postValue(true)
