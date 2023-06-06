@@ -6,13 +6,13 @@ import com.e.tubesmobile.model.Smarthphone
 
 @Dao
 interface SmarthphoneDao {
-    @Query("SELECT * FROM Komputer ORDER BY model DESC")
+    @Query("SELECT * FROM Smarthphone ORDER BY model DESC")
     fun loadAll(): LiveData<List<Smarthphone>>
 
-    @Query("SELECT * FROM Komputer ORDER BY model DESC")
+    @Query("SELECT * FROM Smarthphone ORDER BY model DESC")
     suspend fun getList(): List<Smarthphone>
 
-    @Query("SELECT * FROM Komputer WHERE id = :id")
+    @Query("SELECT * FROM Smarthphone WHERE id = :id")
     suspend fun find(id: String): Smarthphone?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -24,6 +24,6 @@ interface SmarthphoneDao {
     @Delete
     fun delete(item: Smarthphone)
 
-    @Query("DELETE FROM Komputer WHERE id = :id")
+    @Query("DELETE FROM Smarthphone WHERE id = :id")
     suspend fun delete(id: String)
 }

@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">TubesMobile</string>
     <string name="home">Home</string>
-    <string name="pengelolaan_komputer">PengelolaanKomputer</string>
+    <string name="pengelolaan_komputer">Pengelolaan Komputer</string>
+    <string name="pengelolaan_periferal">Pengelolaan Periferal</string>
+    <string name="pengelolaan_smarthphone">Pengelolaan Smarthphone</string>
     <string name="setting">Setting</string>
 </resources>

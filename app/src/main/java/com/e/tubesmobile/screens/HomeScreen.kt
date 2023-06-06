@@ -26,6 +26,8 @@ fun HomeScreen(navController: NavHostController, snackbarHostState: SnackbarHost
     val menus = listOf(
         Menu.HOME,
         Menu.PENGELOLAAN_KOMPUTER,
+        Menu.PENGELOLAAN_PERIFERAL,
+        Menu.PENGELOLAAN_SMARTHPHONE,
         Menu.SETTING)
     val listState = rememberLazyListState()
 
@@ -78,7 +80,7 @@ fun HomeScreen(navController: NavHostController, snackbarHostState: SnackbarHost
         }
         Spacer(modifier = Modifier.height(10.dp))
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate("pengelolaan-periferal") },
             modifier = Modifier
                 .height(45.dp)
                 .width(200.dp),
@@ -94,7 +96,7 @@ fun HomeScreen(navController: NavHostController, snackbarHostState: SnackbarHost
         }
         Spacer(modifier = Modifier.height(10.dp))
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate("pengelolaan-smarthphone") },
             modifier = Modifier
                 .height(45.dp)
                 .width(200.dp),
