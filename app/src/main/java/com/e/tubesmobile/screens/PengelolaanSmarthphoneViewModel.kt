@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.e.tubesmobile.model.JenisSmarthphone
 import com.e.tubesmobile.model.Smarthphone
 import com.e.tubesmobile.repositories.SmarthphoneRepository
+import java.util.Date
 import javax.inject.Inject
 
 class PengelolaanSmarthphoneViewModel @Inject constructor(
@@ -43,7 +44,7 @@ class PengelolaanSmarthphoneViewModel @Inject constructor(
         model: String,
         warna: String,
         storage: Int,
-        tanggalRilis: String,
+        tanggalRilis: Date,
         sistemOperasi: JenisSmarthphone
     ){
         _isLoading.postValue(true)
@@ -69,7 +70,7 @@ class PengelolaanSmarthphoneViewModel @Inject constructor(
         model: String,
         warna: String,
         storage: Int,
-        tanggalRilis: String,
+        tanggalRilis: Date,
         sistemOperasi: JenisSmarthphone
     ){
         _isLoading.postValue(true)
