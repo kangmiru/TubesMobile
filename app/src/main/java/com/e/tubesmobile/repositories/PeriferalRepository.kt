@@ -43,12 +43,12 @@ class PeriferalRepository @Inject constructor(
         nama: String,
         harga: Int,
         deskripsi: String,
-        jenisPeriferal: JenisPeriferal,
+        jenis: JenisPeriferal,
         onSuccess: (Periferal) -> Unit,
         onError: (Periferal?, String) -> Unit
     ){
         val id = uuid4().toString()
-        val item = Periferal(id, nama, harga, deskripsi, jenisPeriferal.toString())
+        val item = Periferal(id, nama, harga, deskripsi, jenis.toString())
         dao.insertAll(item)
         api.insert(item)
             .suspendOnSuccess {
@@ -67,11 +67,11 @@ class PeriferalRepository @Inject constructor(
         nama: String,
         harga: Int,
         deskripsi: String,
-        jenisPeriferal: JenisPeriferal,
+        jenis: JenisPeriferal,
         onSuccess: (Periferal) -> Unit,
         onError: (Periferal?, String) -> Unit
     ){
-        val item = Periferal(id, nama, harga, deskripsi,jenisPeriferal.toString())
+        val item = Periferal(id, nama, harga, deskripsi,jenis.toString())
         dao.insertAll(item)
         api.insert(item)
             .suspendOnSuccess {

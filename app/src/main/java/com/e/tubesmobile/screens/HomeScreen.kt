@@ -122,7 +122,7 @@ fun HomeScreen(navController: NavHostController, snackbarHostState: SnackbarHost
             shape = RoundedCornerShape(8.dp)
         ) {
             Text(
-                text = "Pengaturan",
+                text = "Kredit",
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color.Black

@@ -45,12 +45,12 @@ class PengelolaanSmarthphoneViewModel @Inject constructor(
     suspend fun insert(
         model: String,
         warna: String,
-        storage: Int,
-        tanggalRilis: Date,
-        sistemOperasi: JenisSmarthphone
+        storage: Short,
+        tanggal_rilis: Date,
+        sistem_operasi: JenisSmarthphone
     ){
         _isLoading.postValue(true)
-        smarthphoneRepository.insert(model, warna, storage, tanggalRilis, sistemOperasi,
+        smarthphoneRepository.insert(model, warna, storage, tanggal_rilis, sistem_operasi,
             onError = { item, message ->
                 _toast.postValue(message)
                 _isLoading.postValue(false)
@@ -71,12 +71,12 @@ class PengelolaanSmarthphoneViewModel @Inject constructor(
         id: String,
         model: String,
         warna: String,
-        storage: Int,
-        tanggalRilis: Date,
-        sistemOperasi: JenisSmarthphone
+        storage: Short,
+        tanggal_rilis: Date,
+        sistem_operasi: JenisSmarthphone
     ){
         _isLoading.postValue(true)
-        smarthphoneRepository.update(id,model,warna,storage,tanggalRilis,sistemOperasi,
+        smarthphoneRepository.update(id,model,warna,storage,tanggal_rilis,sistem_operasi,
             onError = { item, message ->
                 _toast.postValue(message)
                 _isLoading.postValue(false)

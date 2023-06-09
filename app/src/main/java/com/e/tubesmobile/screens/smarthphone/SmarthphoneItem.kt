@@ -64,10 +64,10 @@ fun SmarthphoneItem(item: Smarthphone,  navController: NavHostController, onDele
                 Text(text = "${item.storage} GB", fontSize = 14.sp, fontWeight = FontWeight.Light)
 
                 Text(text = "Tanggal Rilis", fontSize = 16.sp, fontWeight = FontWeight.Bold)
-                Text(text = dateFormat.format(item.tanggalRilis), fontSize = 14.sp, fontWeight = FontWeight.Light)
+                Text(text = dateFormat.format(item.tanggal_rilis), fontSize = 14.sp, fontWeight = FontWeight.Light)
 
                 Text(text = "Sistem Operasi", fontSize = 16.sp, fontWeight = FontWeight.Bold)
-                Text(text = item.sistemOperasi, fontSize = 14.sp, fontWeight = FontWeight.Light)
+                Text(text = item.sistem_operasi, fontSize = 14.sp, fontWeight = FontWeight.Light)
 
                 Row(modifier = Modifier.fillMaxWidth()) {
                     Button(

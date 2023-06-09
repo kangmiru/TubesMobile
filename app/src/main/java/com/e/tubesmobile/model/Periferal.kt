@@ -9,6 +9,6 @@ data class Periferal(
     val nama:String,
     val harga:Int,
     val deskripsi: String,
-    val jenisPeriferal: String
+    val jenis: String
         )
 

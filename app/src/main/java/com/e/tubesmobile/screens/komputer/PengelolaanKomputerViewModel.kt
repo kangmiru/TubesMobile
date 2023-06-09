@@ -44,11 +44,11 @@ import javax.inject.Inject
          merk: String,
          jenis: JenisKomputer,
          harga: Int,
-         dapatDiUpgrade: Boolean,
+         dapat_diupgrade: Int,
          spesifikasi: String
      ){
          _isLoading.postValue(true)
-         komputerRepository.insert(merk, jenis, harga, dapatDiUpgrade, spesifikasi,
+         komputerRepository.insert(merk, jenis, harga, dapat_diupgrade, spesifikasi,
              onError = { item, message ->
                  _toast.postValue(message)
                  _isLoading.postValue(false)
@@ -66,10 +66,10 @@ import javax.inject.Inject
                         merk: String,
                         jenis: JenisKomputer,
                         harga: Int,
-                        dapatDiUpgrade: Boolean,
+                        dapat_diupgrade: Int,
                         spesifikasi: String){
          _isLoading.postValue(true)
-         komputerRepository.update(id, merk, jenis, harga, dapatDiUpgrade, spesifikasi,
+         komputerRepository.update(id, merk, jenis, harga, dapat_diupgrade, spesifikasi,
              onError = { item, message ->
                  _toast.postValue(message)
                  _isLoading.postValue(false)

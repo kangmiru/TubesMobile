@@ -44,10 +44,10 @@ class PengelolaanPeriferalViewModel @Inject constructor(
         nama: String,
         harga: Int,
         deskripsi: String,
-        jenisPeriferal: JenisPeriferal
+        jenis: JenisPeriferal
     ){
         _isLoading.postValue(true)
-        periferalRepository.insert(nama, harga, deskripsi, jenisPeriferal,
+        periferalRepository.insert(nama, harga, deskripsi, jenis,
             onError = {item, message ->
                 _toast.postValue(message)
                 _isLoading.postValue(false)
@@ -69,10 +69,10 @@ class PengelolaanPeriferalViewModel @Inject constructor(
         nama: String,
         harga: Int,
         deskripsi: String,
-        jenisPeriferal: JenisPeriferal
+        jenis: JenisPeriferal
     ){
         _isLoading.postValue(true)
-        periferalRepository.update(id, nama, harga, deskripsi, jenisPeriferal,
+        periferalRepository.update(id, nama, harga, deskripsi, jenis,
             onError = { item, message ->
                 _toast.postValue(message)
                 _isLoading.postValue(false)

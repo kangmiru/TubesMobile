@@ -110,7 +110,7 @@ fun MainScreen() {
                     HomeScreen(navController = navController, snackbarHostState = scaffoldState.snackbarHostState , modifier = Modifier.padding(innerPadding))
                 }
                 composable("setting") {
-                    SettingScreen()
+                    CreditScreen()
                 }
                 composable("pengelolaan-komputer") {
                     title.value = "Pengelolaan Komputer"

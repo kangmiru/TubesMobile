@@ -44,13 +44,13 @@ class KomputerRepository @Inject constructor(
         merk: String,
         jenis: JenisKomputer,
         harga: Int,
-        dapatDiUpgrade : Boolean,
+        dapat_diupgrade : Int,
         spesifikasi : String,
         onSuccess: (Komputer) -> Unit,
         onError: (Komputer?, String) -> Unit
     ) {
         val id = uuid4().toString()
-        val item = Komputer(id, merk, jenis.toString(), harga, dapatDiUpgrade, spesifikasi)
+        val item = Komputer(id, merk, jenis.toString(), harga, dapat_diupgrade, spesifikasi)
         dao.insertAll(item)
         api.insert(item)
             .suspendOnSuccess {
@@ -68,12 +68,12 @@ class KomputerRepository @Inject constructor(
         merk: String,
         jenis: JenisKomputer,
         harga: Int,
-        dapatDiUpgrade : Boolean,
+        dapat_diupgrade: Int,
         spesifikasi : String,
         onSuccess: (Komputer) -> Unit,
         onError: (Komputer?, String) -> Unit
     ) {
-        val item = Komputer(id, merk, jenis.toString(), harga, dapatDiUpgrade, spesifikasi)
+        val item = Komputer(id, merk, jenis.toString(), harga, dapat_diupgrade, spesifikasi)
         dao.insertAll(item)
         api.update(id, item)
             .suspendOnSuccess {
