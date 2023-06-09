@@ -59,7 +59,7 @@ fun PeriferalItem(item: Periferal,  navController: NavHostController, onDelete: 
                 Text(text = item.deskripsi, fontSize = 14.sp, fontWeight = FontWeight.Light)
 
                 Text(text = "Jenis Periferal", fontSize = 16.sp, fontWeight = FontWeight.Bold)
-                Text(text = item.jenisPeriferal, fontSize = 14.sp, fontWeight = FontWeight.Light)
+                Text(text = item.jenis, fontSize = 14.sp, fontWeight = FontWeight.Light)
 
                 Row(modifier = Modifier.fillMaxWidth()) {
                     Button(

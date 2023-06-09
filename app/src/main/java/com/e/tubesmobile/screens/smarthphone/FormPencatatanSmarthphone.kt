@@ -42,8 +42,8 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
     val model = remember { mutableStateOf(TextFieldValue("")) }
     val warna = remember { mutableStateOf(TextFieldValue("")) }
     val storage = remember { mutableStateOf(TextFieldValue("")) }
-    var tanggalRilis by remember { mutableStateOf(LocalDate.now()) }
-    val sistemOperasi = remember { mutableStateOf(JenisSmarthphone.Android) }
+    var tanggal_rilis by remember { mutableStateOf(LocalDate.now()) }
+    val sistem_operasi = remember { mutableStateOf(JenisSmarthphone.Android) }
     val scope = rememberCoroutineScope()
     val tanggalDialogState = rememberMaterialDialogState()
     val context = LocalContext.current
@@ -52,7 +52,7 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
         derivedStateOf {
             DateTimeFormatter
                 .ofPattern("MMM dd yyyy")
-                .format(tanggalRilis)
+                .format(tanggal_rilis)
         }
     }
 
@@ -117,7 +117,7 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
 
         OutlinedTextField(
             label = { Text(text = "Jenis Operasi Sistem Smarthphone") },
-            value = sistemOperasi.value.toString(),
+            value = sistem_operasi.value.toString(),
             onValueChange = {},
             modifier = Modifier
                 .padding(4.dp)
@@ -135,7 +135,7 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
             items.forEach { item ->
                 DropdownMenuItem(
                     onClick = {
-                        sistemOperasi.value = item
+                        sistem_operasi.value = item
                         expanded = false
                     }
                 ) {
@@ -172,9 +172,9 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
                             viewModel.insert(
                                 model = model.value.text,
                                 warna = warna.value.text,
-                                storage = storage.value.text.toIntOrNull() ?: 0,
-                                Date.from(tanggalRilis.atStartOfDay(ZoneId.systemDefault()).toInstant()),
-                                sistemOperasi.value
+                                storage = storage.value.text.toShortOrNull() ?: 0,
+                                Date.from(tanggal_rilis.atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                                sistem_operasi.value
                             )
                         }
                     }else{
@@ -183,9 +183,9 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
                                 id,
                                 model.value.text,
                                 warna.value.text,
-                                storage.value.text.toIntOrNull() ?: 0,
-                                Date.from(tanggalRilis.atStartOfDay(ZoneId.systemDefault()).toInstant()),
-                                sistemOperasi.value
+                                storage.value.text.toShortOrNull() ?: 0,
+                                Date.from(tanggal_rilis.atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                                sistem_operasi.value
                             )
                         }
                     }
@@ -209,8 +209,8 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
                     model.value = TextFieldValue("")
                     warna.value = TextFieldValue("")
                     storage.value = TextFieldValue("")
-                    tanggalRilis = LocalDate.now()
-                    sistemOperasi.value = JenisSmarthphone.Android
+                    tanggal_rilis = LocalDate.now()
+                    sistem_operasi.value = JenisSmarthphone.Android
                 },
                 colors = resetButtonColors
             ) {
@@ -237,8 +237,8 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
                     model.value = TextFieldValue("")
                     warna.value = TextFieldValue("")
                     storage.value = TextFieldValue("")
-                    tanggalRilis = smarthphone.tanggalRilis.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
-                    sistemOperasi.value = JenisSmarthphone.valueOf(smarthphone.sistemOperasi)
+                    tanggal_rilis = smarthphone.tanggal_rilis.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+                    sistem_operasi.value = JenisSmarthphone.valueOf(smarthphone.sistem_operasi)
                 }
             }
         }
@@ -258,7 +258,7 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
                 it.dayOfMonth % 2 == 1
             }
         ) {
-            tanggalRilis = it
+            tanggal_rilis = it
         }
     }
 }

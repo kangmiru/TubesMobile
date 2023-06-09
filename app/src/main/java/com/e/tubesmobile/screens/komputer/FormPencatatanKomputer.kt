@@ -29,7 +29,7 @@ fun FormPencatatanKomputer(navController : NavHostController, id: String? = null
     val merk = remember { mutableStateOf(TextFieldValue("")) }
     val jenis = remember { mutableStateOf(JenisKomputer.Laptop) }
     val harga = remember { mutableStateOf(TextFieldValue("")) }
-    val dapatDiUpgrade = remember { mutableStateOf(false) }
+    val dapat_diupgrade = remember { mutableStateOf(0) }
     val spesifikasi = remember { mutableStateOf(TextFieldValue("")) }
     val isLoading = remember { mutableStateOf(false) }
     val buttonLabel = if (isLoading.value) "Mohon tunggu..." else "Simpan"
@@ -103,9 +103,9 @@ fun FormPencatatanKomputer(navController : NavHostController, id: String? = null
             .padding(4.dp)
             .fillMaxWidth()) {
             Checkbox(
-                checked = dapatDiUpgrade.value,
-                onCheckedChange = {
-                    dapatDiUpgrade.value = it
+                checked = dapat_diupgrade.value != 0,
+                onCheckedChange = { checked ->
+                    dapat_diupgrade.value = if (checked) 1 else 0
                 },
                 modifier = Modifier.padding(end = 8.dp)
             )
@@ -141,21 +141,23 @@ fun FormPencatatanKomputer(navController : NavHostController, id: String? = null
                 onClick = {
                     if (id == null){
                         scope.launch {
+                            val dapatDiUpgrade = if (dapat_diupgrade.value != 0) 1 else 0
                             viewModel.insert(
                                 merk = merk.value.text,
                                 jenis = jenis.value,
                                 harga = harga.value.text.toIntOrNull() ?: 0,
-                                dapatDiUpgrade.value,
+                                dapat_diupgrade = dapatDiUpgrade,
                                 spesifikasi = spesifikasi.value.text)
                         }
                     } else {
                         scope.launch {
+                            val dapatDiUpgrade = if (dapat_diupgrade.value != 0) 1 else 0
                             viewModel.update(
                                 id,
                                 merk = merk.value.text,
                                 jenis = jenis.value,
                                 harga = harga.value.text.toIntOrNull() ?: 0,
-                                dapatDiUpgrade = dapatDiUpgrade.value,
+                                dapat_diupgrade = dapatDiUpgrade,
                                 spesifikasi = spesifikasi.value.text
                             )
                         }
@@ -180,7 +182,7 @@ fun FormPencatatanKomputer(navController : NavHostController, id: String? = null
                     merk.value = TextFieldValue("")
                     jenis.value = JenisKomputer.Laptop
                     harga.value = TextFieldValue("")
-                    dapatDiUpgrade.value = false
+                    dapat_diupgrade.value = 0
                     spesifikasi.value = TextFieldValue("")
                 },
                 colors = resetButtonColors
@@ -207,7 +209,7 @@ fun FormPencatatanKomputer(navController : NavHostController, id: String? = null
                     merk.value = TextFieldValue(komputer.merk)
                     jenis.value = JenisKomputer.valueOf(komputer.jenis)
                     harga.value = TextFieldValue(komputer.harga.toString())
-                    dapatDiUpgrade.value = komputer.dapatDiupgarade
+                    dapat_diupgrade.value = komputer.dapat_diupgrade
                     spesifikasi.value = TextFieldValue(komputer.spesifikasi)
                 }
             }

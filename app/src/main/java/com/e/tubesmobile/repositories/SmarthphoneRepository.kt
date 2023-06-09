@@ -40,14 +40,14 @@ class SmarthphoneRepository @Inject constructor(
     suspend fun insert(
         model: String,
         warna: String,
-        storage: Int,
-        tanggalRilis: Date,
-        sistemOperasi: JenisSmarthphone,
+        storage: Short,
+        tanggal_rilis: Date,
+        sistem_operasi: JenisSmarthphone,
         onSuccess: (Smarthphone) -> Unit,
         onError: (Smarthphone?, String) -> Unit
     ){
         val id = uuid4().toString()
-        val item = Smarthphone(id, model,warna, storage, tanggalRilis, sistemOperasi.toString())
+        val item = Smarthphone(id, model,warna, storage, tanggal_rilis, sistem_operasi.toString())
         dao.insertAll(item)
         api.insert(item)
             .suspendOnSuccess {
@@ -65,13 +65,13 @@ class SmarthphoneRepository @Inject constructor(
         id:String,
         model: String,
         warna: String,
-        storage: Int,
-        tanggalRilis: Date,
-        sistemOperasi: JenisSmarthphone,
+        storage: Short,
+        tanggal_rilis: Date,
+        sistem_operasi: JenisSmarthphone,
         onSuccess: (Smarthphone) -> Unit,
         onError: (Smarthphone?, String) -> Unit
     ){
-        val item = Smarthphone(id, model, warna, storage, tanggalRilis, sistemOperasi.toString())
+        val item = Smarthphone(id, model, warna, storage, tanggal_rilis, sistem_operasi.toString())
         dao.insertAll(item)
         api.insert(item)
             .suspendOnSuccess {

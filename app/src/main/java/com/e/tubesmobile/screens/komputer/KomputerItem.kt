@@ -27,7 +27,7 @@ fun KompterItem(item: Komputer, navController: NavHostController, onDelete: (Str
     var expanded by remember { mutableStateOf(false) }
     val subMenus = listOf("Edit", "Delete")
     val confirmationDialogState = rememberMaterialDialogState()
-    
+
     Card(
         modifier = Modifier
             .padding(horizontal = 8.dp, vertical = 8.dp)
@@ -61,7 +61,7 @@ fun KompterItem(item: Komputer, navController: NavHostController, onDelete: (Str
                 Text(text = "Rp. ${item.harga}", fontSize = 14.sp, fontWeight = FontWeight.Light)
 
                 Text(text = "Dapat DiUpgrade", fontSize = 16.sp, fontWeight = FontWeight.Bold)
-                Text(text = item.dapatDiupgarade.toString(), fontSize = 14.sp, fontWeight = FontWeight.Light)
+                Text(text = if (item.dapat_diupgrade == 1) "Ya" else "Tidak", fontSize = 14.sp, fontWeight = FontWeight.Light)
 
                 Text(text = "Spesifikasi", fontSize = 16.sp, fontWeight = FontWeight.Bold)
                 Text(text = item.spesifikasi, fontSize = 14.sp, fontWeight = FontWeight.Light)
