@@ -51,7 +51,7 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
     val formattedDate by remember {
         derivedStateOf {
             DateTimeFormatter
-                .ofPattern("MMM dd yyyy")
+                .ofPattern("dd-MM-yyyy")
                 .format(tanggal_rilis)
         }
     }
@@ -107,10 +107,7 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
                 .clickable {
                     tanggalDialogState.show()
                 },
-            keyboardOptions = KeyboardOptions(
-                capitalization =
-                KeyboardCapitalization.Characters, keyboardType = KeyboardType.Text
-            ),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             placeholder = { Text(text = "Pilih Tanggal Rilis") },
             enabled = false
         )
@@ -169,22 +166,24 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
                 onClick = {
                     if (id == null) {
                         scope.launch {
+                            val tanggalRilis = Date.from(tanggal_rilis.atStartOfDay(ZoneId.systemDefault()).toInstant())
                             viewModel.insert(
                                 model = model.value.text,
                                 warna = warna.value.text,
                                 storage = storage.value.text.toShortOrNull() ?: 0,
-                                Date.from(tanggal_rilis.atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                                tanggal_rilis = tanggalRilis,
                                 sistem_operasi.value
                             )
                         }
                     }else{
                         scope.launch{
+                            val tanggalRilis = Date.from(tanggal_rilis.atStartOfDay(ZoneId.systemDefault()).toInstant())
                             viewModel.update(
                                 id,
                                 model.value.text,
                                 warna.value.text,
                                 storage.value.text.toShortOrNull() ?: 0,
-                                Date.from(tanggal_rilis.atStartOfDay(ZoneId.systemDefault()).toInstant()),
+                                tanggal_rilis = tanggalRilis,
                                 sistem_operasi.value
                             )
                         }
@@ -253,10 +252,7 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
     ) {
         datepicker(
             initialDate = LocalDate.now(),
-            title = "Pick a date",
-            allowedDateValidator = {
-                it.dayOfMonth % 2 == 1
-            }
+            title = "Pick a date"
         ) {
             tanggal_rilis = it
         }
