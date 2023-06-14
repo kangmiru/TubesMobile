@@ -29,7 +29,7 @@ fun SmarthphoneItem(item: Smarthphone,  navController: NavHostController, onDele
     var expanded by remember { mutableStateOf(false) }
     val SubMenus = listOf("Edit", "Delete")
     val confirmationDialogState = rememberMaterialDialogState()
-    val dateFormat = SimpleDateFormat("dd MMMM yyyy", Locale("id", "ID"))
+    val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale("id", "ID"))
 
     Card(
         modifier = Modifier
