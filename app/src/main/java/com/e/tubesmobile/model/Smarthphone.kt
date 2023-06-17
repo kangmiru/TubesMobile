@@ -12,7 +12,6 @@ data class Smarthphone(
     val model:String,
     val warna:String,
     val storage:Short,
-    @ColumnInfo(name = "tanggal_rilis")
-    val tanggal_rilis: Date,
+    val tanggal_rilis: String,
     val sistem_operasi: String,
 )

@@ -7,7 +7,6 @@ import com.e.tubesmobile.model.JenisSmarthphone
 import com.e.tubesmobile.model.Smarthphone
 import com.e.tubesmobile.repositories.SmarthphoneRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -46,8 +45,8 @@ class PengelolaanSmarthphoneViewModel @Inject constructor(
         model: String,
         warna: String,
         storage: Short,
-        tanggal_rilis: Date,
-        sistem_operasi: JenisSmarthphone
+        tanggal_rilis: String,
+        sistem_operasi: String
     ){
         _isLoading.postValue(true)
         smarthphoneRepository.insert(model, warna, storage, tanggal_rilis, sistem_operasi,
@@ -72,8 +71,8 @@ class PengelolaanSmarthphoneViewModel @Inject constructor(
         model: String,
         warna: String,
         storage: Short,
-        tanggal_rilis: Date,
-        sistem_operasi: JenisSmarthphone
+        tanggal_rilis: String,
+        sistem_operasi: String
     ){
         _isLoading.postValue(true)
         smarthphoneRepository.update(id,model,warna,storage,tanggal_rilis,sistem_operasi,

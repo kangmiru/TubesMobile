@@ -8,8 +8,7 @@ import com.e.tubesmobile.model.Periferal
 import com.e.tubesmobile.model.Smarthphone
 
 
-@Database(entities = [Komputer::class, Periferal::class, Smarthphone::class], version = 8)
-@TypeConverters(DateConverter::class)
+@Database(entities = [Komputer::class, Periferal::class, Smarthphone::class], version = 9)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun komputerDao() : KomputerDao
 
