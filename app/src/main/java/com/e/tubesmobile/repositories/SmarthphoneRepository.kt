@@ -41,8 +41,8 @@ class SmarthphoneRepository @Inject constructor(
         model: String,
         warna: String,
         storage: Short,
-        tanggal_rilis: Date,
-        sistem_operasi: JenisSmarthphone,
+        tanggal_rilis: String,
+        sistem_operasi: String,
         onSuccess: (Smarthphone) -> Unit,
         onError: (Smarthphone?, String) -> Unit
     ){
@@ -66,8 +66,8 @@ class SmarthphoneRepository @Inject constructor(
         model: String,
         warna: String,
         storage: Short,
-        tanggal_rilis: Date,
-        sistem_operasi: JenisSmarthphone,
+        tanggal_rilis: String,
+        sistem_operasi: String,
         onSuccess: (Smarthphone) -> Unit,
         onError: (Smarthphone?, String) -> Unit
     ){

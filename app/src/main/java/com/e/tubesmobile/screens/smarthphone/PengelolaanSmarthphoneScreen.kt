@@ -21,6 +21,8 @@ import androidx.navigation.NavHostController
 import com.e.tubesmobile.model.Smarthphone
 import com.e.tubesmobile.screens.smarthphone.PengelolaanSmarthphoneViewModel
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Composable
 fun PengelolaanSmarthphoneScreen(
@@ -32,6 +34,7 @@ fun PengelolaanSmarthphoneScreen(
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     val items: List<Smarthphone> by viewModel.list.observeAsState(initial = listOf())
+    val dateFormat = SimpleDateFormat("dd-MM- yyyy", Locale("id", "ID"))
 
     Column(modifier = Modifier.fillMaxWidth()) {
         Button(onClick = {

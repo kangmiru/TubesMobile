@@ -1,19 +1,18 @@
 package com.e.tubesmobile.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
@@ -28,10 +27,11 @@ import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.date.datepicker
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.util.Date
+import java.util.*
 
 
 @Composable
@@ -42,17 +42,17 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
     val model = remember { mutableStateOf(TextFieldValue("")) }
     val warna = remember { mutableStateOf(TextFieldValue("")) }
     val storage = remember { mutableStateOf(TextFieldValue("")) }
-    var tanggal_rilis by remember { mutableStateOf(LocalDate.now()) }
+    var tanggal_rilis by remember { mutableStateOf("") }
     val sistem_operasi = remember { mutableStateOf(JenisSmarthphone.Android) }
     val scope = rememberCoroutineScope()
     val tanggalDialogState = rememberMaterialDialogState()
     val context = LocalContext.current
 
+    val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+
     val formattedDate by remember {
         derivedStateOf {
-            DateTimeFormatter
-                .ofPattern("dd-MM-yyyy")
-                .format(tanggal_rilis)
+            tanggal_rilis.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
         }
     }
 
@@ -97,20 +97,18 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
             placeholder = { Text(text = "Storage Periferal") }
         )
 
-        OutlinedTextField(
-            label = { Text(text = "Tanggal Rilis") },
-            value = formattedDate,
-            onValueChange = {},
-            modifier = Modifier
-                .padding(4.dp)
-                .fillMaxWidth()
-                .clickable {
-                    tanggalDialogState.show()
-                },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            placeholder = { Text(text = "Pilih Tanggal Rilis") },
-            enabled = false
-        )
+        Row(modifier = Modifier.padding(start = 8.dp, top = 15.dp).clickable {
+            tanggalDialogState.show()
+        }) {
+            Icon(
+                Icons.Default.DateRange,
+                contentDescription = "Date Icon",
+                modifier = Modifier.size(24.dp),
+                tint = Color.Red,
+            )
+            Spacer(modifier = Modifier.width(15.dp))
+            Text(text = formattedDate, modifier = Modifier.padding(start = 8.dp))
+        }
 
         OutlinedTextField(
             label = { Text(text = "Jenis Operasi Sistem Smarthphone") },
@@ -166,25 +164,23 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
                 onClick = {
                     if (id == null) {
                         scope.launch {
-                            val tanggalRilis = Date.from(tanggal_rilis.atStartOfDay(ZoneId.systemDefault()).toInstant())
                             viewModel.insert(
                                 model = model.value.text,
                                 warna = warna.value.text,
                                 storage = storage.value.text.toShortOrNull() ?: 0,
-                                tanggal_rilis = tanggalRilis,
-                                sistem_operasi.value
+                                tanggal_rilis = tanggal_rilis,
+                                sistem_operasi.value.toString()
                             )
                         }
                     }else{
                         scope.launch{
-                            val tanggalRilis = Date.from(tanggal_rilis.atStartOfDay(ZoneId.systemDefault()).toInstant())
                             viewModel.update(
                                 id,
                                 model.value.text,
                                 warna.value.text,
                                 storage.value.text.toShortOrNull() ?: 0,
-                                tanggal_rilis = tanggalRilis,
-                                sistem_operasi.value
+                                tanggal_rilis = tanggal_rilis,
+                                sistem_operasi.value.toString()
                             )
                         }
                     }
@@ -208,7 +204,7 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
                     model.value = TextFieldValue("")
                     warna.value = TextFieldValue("")
                     storage.value = TextFieldValue("")
-                    tanggal_rilis = LocalDate.now()
+                    tanggal_rilis = TextFieldValue("").toString()
                     sistem_operasi.value = JenisSmarthphone.Android
                 },
                 colors = resetButtonColors
@@ -236,7 +232,7 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
                     model.value = TextFieldValue("")
                     warna.value = TextFieldValue("")
                     storage.value = TextFieldValue("")
-                    tanggal_rilis = smarthphone.tanggal_rilis.toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+                    tanggal_rilis = smarthphone.tanggal_rilis
                     sistem_operasi.value = JenisSmarthphone.valueOf(smarthphone.sistem_operasi)
                 }
             }
@@ -246,15 +242,27 @@ fun FormPencatatanSmarthphone (navController: NavHostController, id: String? = n
     MaterialDialog(
         dialogState = tanggalDialogState,
         buttons = {
-        positiveButton(text = "OK")
-        negativeButton("Batal")
-    }
+            positiveButton(text = "Ok") {
+                Toast.makeText(
+                    context,
+                    "Clicked ok",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            negativeButton(text = "Cancel")
+        }
     ) {
         datepicker(
             initialDate = LocalDate.now(),
-            title = "Pick a date"
-        ) {
-            tanggal_rilis = it
+            title = "Pick a date",
+
+            ) {
+            tanggal_rilis = it.format(formatter)
         }
+    }
+
+    fun formatDateToString(date: Date): String {
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        return dateFormat.format(date)
     }
 }
